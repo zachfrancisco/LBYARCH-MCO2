@@ -1,64 +1,65 @@
 section .data
     float_255 dq 255.0
-    fmt_val db "%d, ", 0
-    fmt_nl db 10, 0
+    stride_500 dq 500
+
 section .text
 bits 64
 default rel
 global imgCvtGrayDoubleToInt
-extern printf
 
 ; RCX = matrix_ptr (double*)
-; RDX = rows (int)
-; R8  = cols (int)
-imgCvtGrayDoubleToInt:  
+; RDX = dest_ptr (int*)
+; R8  = rows (int)
+; R9  = cols (int)
+
+imgCvtGrayDoubleToInt:
     push rbx
     push r12
     push r13
     push r14
     push r15
     
-    sub rsp, 8*5
+    mov rbx, rcx    ; rbx = matrix_ptr
+    mov r12, rdx    ; r12 = dest_ptr
+    mov r13, r8     ; r13 = rows
+    mov r14, r9     ; r14 = cols
     
-    mov rbx, rcx
-    mov r12, rdx
-    mov r13, r8
-    
-    xor r14, r14
+    xor r15, r15    ; r15 = row index (i)
     
     OuterLoop:
-        cmp r14, r12
+        cmp r15, r13
         jge End
         
-        xor r15, r15
+        xor rdi, rdi    ; rdi = col index (j)
     
     InnerLoop:
-        cmp r15, r13
+        cmp rdi, r14
         jge EndInner
         
-        mov rax, r14
-        imul rax, 500
-        add rax, r15
+        mov rax, r15
+        imul rax, [stride_500]
+        add rax, rdi
         
         movsd xmm0, [rbx + rax * 8]
+        
         mulsd xmm0, [float_255]
+        
         cvttsd2si rdx, xmm0
         
-        lea rcx, [fmt_val]
-        call printf
+        mov rsi, r15
+        imul rsi, r14
+        add rsi, rdi
         
-        inc r15
+        mov [r12 + rsi * 4], rdx
+        
+        inc rdi
         jmp InnerLoop
 
       EndInner:
-        lea rcx, [fmt_nl]
-        call printf
-        
-        inc r14
+        inc r15
         jmp OuterLoop
         
        End:
-        add rsp, 40
         pop r15
         pop r14
         pop r13

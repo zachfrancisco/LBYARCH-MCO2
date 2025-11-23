@@ -1,12 +1,13 @@
 #include <stdio.h>
-extern void imgCvtGrayDoubleToInt(double *matrix_ptr, int rows, int cols);
+#include <stdlib.h>
+
+extern void imgCvtGrayDoubleToInt(double *matrix_ptr, int *dest_ptr, int rows, int cols);
 
 int main()
 {
     int rows = 0;
     int cols = 0;
     double matrix[500][500] = {0};
-    // Zach's machine can only handle a 500 x 500 double 2D array
 
     scanf("%d", &rows);
     scanf("%d", &cols);
@@ -20,6 +21,9 @@ int main()
         }
     }
 
+    int *int_matrix = (int*)malloc(rows * cols * sizeof(int));
+
+    printf("Input double matrix:\n");
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
@@ -29,6 +33,19 @@ int main()
         printf("\n");
     }
 
-    imgCvtGrayDoubleToInt((double *)matrix, rows, cols);
+    imgCvtGrayDoubleToInt((double *)matrix, int_matrix, rows, cols);
+
+    printf("\nConverted integer matrix:\n");
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            printf("%d ", int_matrix[i * cols + j]);
+        }
+        printf("\n");
+    }
+
+    free(int_matrix);
+
     return 0;
 }
