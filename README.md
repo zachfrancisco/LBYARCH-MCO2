@@ -2,8 +2,15 @@
 
 By Francisco and Limtin, S20A
 
-## Program Ouput
+## Program Input and Output
+
+### Specs Example
+![alt text](image-1.png)
 ![alt text](image.png)
+
+### 10x10 Example
+![alt text](image-2.png)
+![alt text](image-3.png)
 
 ## Results (in seconds)
 ### 10x10
