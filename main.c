@@ -12,6 +12,9 @@ int main()
     double matrix[500][500] = {0};
     double time = 0.0;
     double total_time = 0.0;
+    int temp = 0;
+    double c_time = 0.0;
+    double c_total_time = 0.0;
 
     // Read input
     scanf("%d", &rows);
@@ -26,7 +29,7 @@ int main()
         }
     }
 
-    int_matrix = (int*)malloc(rows * cols * sizeof(int));
+    int_matrix = (int *)malloc(rows * cols * sizeof(int));
 
     // Print input
     printf("Input double matrix:\n");
@@ -67,9 +70,41 @@ int main()
         total_time += time;
     }
 
+    for (int z = 0; z < 30; z++)
+    {
+        clock_t start_time = clock();
+
+        printf("\n----------------------------------------");
+        printf("\nIteration %d:\n", z + 1);
+
+        printf("\nConverted integer matrix:\n");
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                temp = matrix[i][j] * 255;
+                printf("%3d", temp);
+                if (j < cols - 1)
+                    printf(", ");
+            }
+            printf("\n");
+        }
+
+        clock_t end_time = clock();
+        c_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+        printf("\nTime: %.3f seconds", c_time);
+
+        c_total_time += c_time;
+    }
+
     printf("\n----------------------------------------");
-    printf("\n\nAverage Time: %.3f seconds\n", total_time / 30.0);
-    printf("Total Time: %.3f seconds\n", total_time);
+    printf("\n\nAverage Time C ONLY: %.3f seconds\n", c_total_time / 30.0);
+    printf("Total Time C ONLY: %.3f seconds\n", c_total_time);
+
+    printf("\n----------------------------------------");
+    printf("\n\nAverage Time C with Nasm: %.3f seconds\n", total_time / 30.0);
+    printf("Total Time C with Nasm: %.3f seconds\n", total_time);
+    printf("\n----------------------------------------");
 
     return 0;
 }
