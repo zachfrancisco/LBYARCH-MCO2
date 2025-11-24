@@ -1,6 +1,7 @@
 # LBYARCH MCO2
 
 By Francisco and Limtin, S20A
+Specs: Grayscale (imgCvtGrayDoubleToInt)
 
 ## Program Input and Output
 
@@ -41,4 +42,4 @@ C Only, Average = 27.693
 C Only, Total = 830.795
 
 ### Explanation
-Hypothetically, NASM is faster in most cases. However, since C does some optimization, making C faster, the results are only slightly different. Cache is also something to consider as it could make the code run faster for both methods.
+Assembly language through NASM hypothetically runs a faster code because the programmer has control over every CPU instruction. However, C compilers, such as GCC uses high optimization levels that generates code slightly slower, or in some cases, slightly faster. A possibility for this is the compiler's ability to do global optimizations in large code blocks and schedule instructions to keep the CPU's pipeline full. Additionally, the compilers have the ability to maximize cache hits and makign efficient memory access than simply reducing instruction count.
