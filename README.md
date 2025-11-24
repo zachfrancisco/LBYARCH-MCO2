@@ -3,6 +3,9 @@
 By Francisco and Limtin, S20A
 Specs: Grayscale (imgCvtGrayDoubleToInt)
 
+## Video
+https://drive.google.com/file/d/1t-DSBVIob6q0_xKAotwWCATtvkwYDM7H/view?usp=sharing
+
 ## Program Input and Output
 
 ### Specs Example
