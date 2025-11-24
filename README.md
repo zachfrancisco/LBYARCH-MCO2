@@ -1,6 +1,11 @@
 # LBYARCH MCO2
 
-By Francisco and Limtin, S20A
+By Francisco, Zachary Mitchell P.
+
+Limtin, Richard Jeremy S.
+
+S20A
+
 Specs: Grayscale (imgCvtGrayDoubleToInt)
 
 ## Video
