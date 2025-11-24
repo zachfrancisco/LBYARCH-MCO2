@@ -32,3 +32,6 @@ NASM + C, Total = 820.546
 C Only, Average = 27.693
 
 C Only, Total = 830.795
+
+### Explanation
+Hypothetically, NASM is faster in most cases. However, since C does some optimization, making C faster, the results are only slightly different. Cache is also something to consider as it could make the code run faster for both methods.
